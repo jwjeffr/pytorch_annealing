@@ -53,7 +53,6 @@ def metropolis(
         raise ValueError(f'Q needs to be a square matrix but has shape {Q.shape}')
 
     # initialize device and run attributes, sending attributes to appropriate device
-
     device = torch.device(device_name)
     Q_ = torch.Tensor(Q).to(device)
     betas = torch.linspace(1.0 / high_temp, 1.0 / low_temp, num_steps).to(device)
@@ -63,24 +62,18 @@ def metropolis(
     rejects = torch.zeros(num_steps).to(device)
 
     # if initial state isn't provided, create a random vector of 0's and 1's, 50% of each
-
     if init is None:
-
         state = (torch.rand(size=(Q.shape[0],)) < 0.5).float().to(device)
-
     else:
-
         state = torch.Tensor(init).to(device)
 
     # calculate initial energy
-
     energy = torch.dot(state, Q_ @ state)
 
     if callback:
         callback('beta,energy')
 
     # generate random numbers now instead of mid-loop
-
     random_numbers = torch.rand(num_steps).to(device)
 
     for step in range(num_steps):
