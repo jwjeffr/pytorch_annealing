@@ -91,7 +91,7 @@ def metropolis(
         new_state[i] = float(not new_state[i])
 
         # calculate changes in energy
-        change = new_state.T @ Q_ @ new_state - state.T @ Q_ @ state
+        change = torch.dot(new_state, Q_ @ new_state) - torch.dot(state, Q_ @ state)
 
         # get boltzmann factor corresponding to change
         boltzmann_factor = torch.exp(-betas[step] * change)
