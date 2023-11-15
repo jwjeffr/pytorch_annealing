@@ -33,7 +33,7 @@ def example(callback):
     run = metropolis(**kwargs)
     present = time.perf_counter()
     sec_elapsed = present - past
-    print(f"metropolis run with {num_steps:.0f} steps took {sec_elapsed:.3f} seconds on device {run.device}")
+    print(f'metropolis run with {num_steps:.0f} steps took {sec_elapsed:.3f} seconds on device {run.device}')
 
     # if callback specified, results are already printed by callback
     if callback:
